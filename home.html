@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="https://d3js.org/d3.v5.js"></script>
+        <script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
+        <style type="text/css">
+            #svg1 {
+                height: 75px;
+            }
+            #svg {
+    display: block;
+    margin: auto;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+svg {
+    width: 800;
+    height: 400;
+}
+feuille de style de l’agent utilisateur
+svg:not(:root) {
+    overflow: hidden;
+}
+body {
+    font-family: /* 1 */ -apple-system, BlinkMacSystemFont, /* 2 */ "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", /* 3 */ "Helvetica Neue", sans-serif;
+    /* font-family: "Lato",Arial,sans-serif; */
+    font-weight: 300;
+}
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+}
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+}
+        </style>
+    </head>
+ 
+    <body>
+       
+        <div id="svg1"></div>
+        
+    </body>
+</html>
+
+<script type="text/javascript">
+
+
+ /*$(function(){
+        $.getJSON('./frequence.json',function(data){
+            console.log('success');
+            
+        }).error(function(){
+            console.log('error');
+        });
+    });*/
+    
+
+
+const datar ='[{"semaine":10,"freq":[["SOUTENIR", 2], ["ÉTUDIANTS", 2], ["WELCO", 1], ["LIVRAISON", 1], ["COLIS", 1], ["CRÉER", 1], ["SOCIAL", 1], ["VEULENT", 1], ["PAGAYER", 1], ["BRASSERIE", 1]]},{"semaine":11,"freq":[["COVID", 31], ["APRÈS", 16], ["LYONNAIS", 15], ["CONTRE", 14], ["VILLEURBANNE", 12], ["SAINT", 12], ["VOITURE", 10], ["TROIS", 10], ["NOUVEAU", 9], ["ÉTUDIANTS", 8]]},{"semaine":12,"freq":[["COVID", 50], ["APRÈS", 35], ["FRANCE", 25], ["CONTRE", 21], ["LYONNAIS", 21], ["RHÔNE", 20], ["COMMENT", 18], ["SAINT", 13], ["AFFAIRE", 13], ["ENFANTS", 13]]},{"semaine":13,"freq":[["COVID", 53], ["APRÈS", 36], ["AVRIL", 22], ["SAINT", 21], ["PÂQUES", 21], ["FRANCE", 18], ["CONTRE", 17], ["LYONNAIS", 15], ["FAIRE", 14], ["VACCINATION", 12]]},{"semaine":14,"freq":[["COVID", 43], ["APRÈS", 26], ["FRANCE", 22], ["NOUVEAU", 18], ["CONTRE", 18], ["AVRIL", 18], ["COMMENT", 18], ["SAINT", 16], ["CONFINEMENT", 15], ["HOMME", 15]]},{"semaine":15,"freq":[["COVID", 35], ["FRANCE", 23], ["LYONNAIS", 22], ["APRÈS", 22], ["SAINT", 17], ["HOMME", 16], ["COMMENT", 14], ["CONTRE", 13], ["VACCINATION", 13], ["RHÔNE", 12]]},{"semaine":16,"freq":[["COVID", 29], ["SAINT", 24], ["FRANCE", 22], ["APRÈS", 22], ["LYONNAIS", 19], ["AVRIL", 15], ["FAIRE", 14], ["VOITURE", 13], ["NOUVEAU", 13], ["CONTRE", 12]]},{"semaine":17,"freq":[["COVID", 26], ["LYONNAIS", 21], ["COMMENT", 17], ["MACRON", 16], ["FRANCE", 16], ["DÉCONFINEMENT", 16], ["APRÈS", 15], ["VOTRE", 14], ["LYONNAISE", 14], ["CONTRE", 13]]},{"semaine":18,"freq":[["COVID", 37], ["APRÈS", 23], ["LYONNAIS", 22], ["RÉGIONALES", 18], ["TROIS", 17], ["CONTRE", 16], ["FAIRE", 15], ["FRANCE", 15], ["VILLEURBANNE", 15], ["SAINT", 15]]},{"semaine":19,"freq":[["COVID", 27], ["LYONNAIS", 21], ["SAINT", 21], ["POLICIER", 15], ["APRÈS", 14], ["COMMENT", 14], ["ENTRE", 13], ["FRANCE", 13], ["CONTRE", 13], ["CIRCULATION", 12]]},{"semaine":20,"freq":[["APRÈS", 27], ["SAINT", 26], ["RÉGIONALES", 23], ["COVID", 23], ["LYONNAIS", 19], ["RÉOUVERTURE", 18], ["FRANCE", 17], ["EUROS", 16], ["TERRASSES", 16], ["PERSONNES", 13]]},{"semaine":21,"freq":[["APRÈS", 38], ["COVID", 27], ["LYONNAIS", 18], ["CONTRE", 18], ["AVOIR", 17], ["TROIS", 17], ["FRANCE", 16], ["HOMME", 15], ["NOUVELLE", 14], ["VILLEURBANNE", 14]]}]';
+const data=JSON.parse(datar);
+//const data=JSON.parse(datar)
+
+console.log(data[0].semaine);
+console.log(data[0].freq);
+console.log(data[0].freq[3][0])
+console.log(data.length)
+var hh=data[0].freq;
+
+const margin = {top: 20, right: 20, bottom: 90, left: 120},
+    width = 800 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+    const x = d3.scaleBand()
+    .range([0, width])
+    .padding(0.1);
+
+const y = d3.scaleLinear()
+    .range([height, 0]);
+    const svg = d3.select("#svg1").append("svg")
+    .attr("id", "svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+    const div = d3.select("body").append("div")
+    .attr("class", "tooltip")         
+    .style("opacity", 0);
+
+    //svg = d3.select("#svg1").append("svg");
+   /* var group = svg.append("g");
+    group.selectAll(".node")
+    .data(data) 
+    .enter() 
+        .append("rect") 
+        .attr("x", 20) 
+        .attr("y", 0) 
+        .attr("width", 5) 
+        .attr("height", data[0].freq[0][1] ); */
+var i=0;
+      
+// ICIIIIIIIIIII
+/*
+    x.domain(data.map(d => d.semaine));
+    y.domain([0, 100]);
+   
+    // Ajout de l'axe X au SVG
+    // Déplacement de l'axe horizontal et du futur texte (via la fonction translate) au bas du SVG
+    // Selection des noeuds text, positionnement puis rotation
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x).tickSize(0))
+        .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)");
+    
+    // Ajout de l'axe Y au SVG avec 
+        svg.append("g")
+        .call(d3.axisLeft(y).ticks(6));
+
+    // Ajout des bars en utilisant les donnée
+    // La largeur de la barre est déterminée par la fonction x
+    // La hauteur par la fonction y en tenant compte de la population
+    // La gestion des events de la souris pour le popup
+    //for(d in data){
+      //  for(let j=0;j<10;j++){
+
+       
+        console.log('gg');
+       
+        svg.selectAll(".bar")
+        .data(data)
+    .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", d => x(d.semaine))
+        .attr("width", x.bandwidth())
+       
+        .attr("y", d => y(d.freq[i][1]))
+        .attr("height", d => height - y(d.freq[i][1]))
+        					
+        .on("mouseover", function(d) {
+            div.transition()        
+                .duration(200)      
+                .style("opacity", .9);
+            div.html(d.freq[i][0]+":" + d.freq[i][1])
+                .style("left", (d3.event.pageX + 10) + "px")     
+                .style("top", (d3.event.pageY - 50) + "px");
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });
+
+*/
+//ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+
+
+x.domain(d.map(function(d) { return d.semaine; }));
+    y.domain([0, d3.max(nestData, function(d){return d3.sum(d.values, function(d){return d.value})})+20]);
+    z.domain(zKeys) 
+
+var g = svg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  g.append("g")
+    .selectAll("g")
+    .data(d3.stack().keys(zKeys)(d))
+    .enter().append("g")
+      .attr("fill", function(d) { return z(d.freq); })
+    .selectAll("rect")
+    .data(function(d) { return d; })
+    .enter().append("rect")
+      .attr("x", function(d) { return x(d.semaine); })
+      .attr("y", function(d) { return y(d.freq[1]); })
+      .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+      .attr("width", x.bandwidth());
+
+</script>
+
